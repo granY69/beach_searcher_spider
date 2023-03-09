@@ -1,5 +1,4 @@
 import scrapy, json, re
-from scrapy.shell import inspect_response
 from scrapy.crawler import CrawlerProcess
 
 class BeachesScraper(scrapy.Spider):
