@@ -70,7 +70,7 @@ class BeachesScraper(scrapy.Spider):
             length = response.xpath("//a[contains(text(), 'Length - ')]/text()").extract_first().replace("Length - ", "")
         except:
             length = ""
-
+            
         yield {
             "beach_url": response.url,
             "beach_supertitle": response.css("div.beach-desc__booking-city::text").extract_first(),
@@ -78,7 +78,7 @@ class BeachesScraper(scrapy.Spider):
             "beach_subtitle": response.css("div.beach-desc__title > h3::text").extract_first().strip(),
             "beach_tags": response.meta.get("beach_tags"),
             "beach_rating": response.css("div.beach-desc__points::text").extract_first(),
-            "beach_rank": response.css("div.beach-desc__out::text").extract_first().strip(),
+            "beach_rank": " ".join([ item.strip() for item in response.css("div.beach-desc__out::text").extract() ]),
             "map_url": response.meta.get("map_url"),
             "coordinates": response.meta.get("coordinates"),
             "key_features": response.css("li.beach-top-special__item span::text").extract(),
